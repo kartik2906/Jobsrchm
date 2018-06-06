@@ -1,0 +1,28 @@
+
+<svg width="125px" height="19px" viewBox="0 0 125 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="23.2068924%" y1="100%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="77.0857355%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <text id="text-3" font-family="HelveticaNeue, Helvetica Neue" font-size="24" font-weight="normal" letter-spacing="1.33333337">
+            <tspan x="36" y="45">JobSearch</tspan>
+        </text>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-Page" transform="translate(-36.000000, -27.000000)">
+            <g id="JobSearch">
+                <use fill="#8A8A8B" fill-rule="evenodd" style="mix-blend-mode: overlay;" xlink:href="#text-3"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#text-3"></use>
+                <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#text-3"></use>
+                <use fill="#8A8A8B" fill-opacity="1" xlink:href="#text-3"></use>
+            </g>
+        </g>
+    </g>
+</svg>

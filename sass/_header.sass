@@ -1,0 +1,140 @@
+//<---------Navbar SECTION -------------->
+
+
+.fixed
+  position: fixed
+  top: 0
+  z-index: 1
+  width: 100%
+
+
+
+#mainNav
+  background-color: $main-color2
+  padding-right: 50px
+
+
+
+
+
+  .navbar-nav
+    li.nav-item
+      a
+        color: white
+        font-family: $main-font
+        font-size: 14px
+        font-weight: lighter
+        margin:  0px 30px 0px 0px
+        text-transform: uppercase
+        text-decoration: none
+        letter-spacing: 1px
+        &:hover
+          color: $a-color
+
+
+
+
+  .navbar-nav
+    li.nav-item
+      a.active
+        border-bottom: 2px solid $a-color
+
+
+
+      #border
+        border-style: solid
+        padding: 10px
+        &:hover
+          color: $a-color
+          background-color: $main-color
+
+
+      @media (max-width: 575px)
+        #border
+          border-style: none
+
+
+
+//<---------Header and searchbar  SECTION -------------->
+header,masthead
+  #showcase
+    background-image: url(../header.jpg)
+    background-position: top
+    background-size: cover
+    background-attachment: fixed
+    min-height: 100vh
+    width: 100%
+    position: relative
+    top: 0%
+
+
+    #layer
+      background-color: $main-color
+      min-height: 100vh
+
+
+
+      p
+        color: white
+        font-family: Avenir-Heavy
+        font-size: 48px
+        letter-spacing: 1.19px
+        margin-top: 100px
+        display: flex
+        justify-content: center
+
+
+
+
+  #srch-layer
+    min-height: 200px
+    background-color: $main-color2
+    box-shadow: 0 13px 15px 0 rgba(0,0,0,0.26)
+
+
+
+    #search-bar
+      padding: 30px
+
+
+
+      .input-group
+        opacity: 0.9
+        background: #FFFFFF
+        border: 1px solid #FFFFFF
+        display: flex
+        justify-content: center
+        align-content: center
+
+      .srch-btn
+        display: flex
+        align-items: center
+        justify-content: center
+        margin: 20px 0px 20px 0
+
+
+
+
+      .btn-primary
+        background: #3B3561
+        border: 1px solid #EEC7C3
+        width: 200px
+        height: 51px
+        font-family: HelveticaNeue
+        font-size: 20px
+        letter-spacing: 1.07px
+        box-shadow: 0 9px 15px 0 rgba(0,0,0,0.26)
+      a
+        color: white
+
+i
+  border: solid white
+  border-width: 0 3px 3px 0
+  display: inline-block
+  padding: 15px
+  margin-top: 480px
+
+
+.down
+  transform: rotate(45deg)
+  -webkit-transform: rotate(45deg)

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css" />
 
   <title>Login</title>
 </head>
@@ -25,7 +25,7 @@
     <a class="navbar-brand  href=""><img src=" ./svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto pl-2">
         <li class="nav-item ">
-          <a href="index.html">Home</a>
+          <a href="/Jobsrchm/app/Home/index">Home</a>
         </li>
         <li class="nav-item ">
           <a href="about.html">About Us </a>
@@ -34,43 +34,16 @@
           <a href="">Contact Us </a>
         </li>
         <li class="nav-item ">
-          <a href="register.html">Register</a>
+          <a href="/Jobsrchm/app/Register/registerForm">Register</a>
         </li>
         <li class="nav-item  ">
-          <a class="active" href="login.html">Login </a>
+          <a class="active" href="/Jobsrchm/app/Login/loginForm">Login </a>
         </li>
       </ul>
       </div>
   </nav>
 
 
-  <?php
-
-  require_once __DIR__ . '/start.php';
-
-  use model\user\User;
-  use helper\Validation;
-
-  $validator1 = new Validation();
-  $users = new User();
-
-  if (isset($_POST['Login'])) {
-
-    $validator1->add_error_field('username');
-    $validator1->add_error_field('password');
-
-
-
-    if (!$validator1->pass()) {
-
-      $users->login_user('username', 'password');
-    }
-  }
-
-
-
-
-  ?>
 
 
 
@@ -90,17 +63,22 @@
 
   <?php
 
-  $users->output_error(); ?>
+  // $users->output_error(); 
+  ?>
   <div class="container" id="login">
 
-    <form method="post" action="">
+    <form method="POST" action="">
       <div class="row">
         <div class=" col-md-12 offset-md-12">
           <div class="form-login text-center">
-            <?php $validator1->output_error('username'); ?>
+            <?php
+            // $data['validator']->output_error('username');
+            echo $data['validator']->output_error('username');
+            ?>
             <input type="text" name="username" class="form-control input-sm chat-input" placeholder="Username" />
             </br>
-            <?php $validator1->output_error('password'); ?>
+            <?php echo $data['validator']->output_error('password');
+            ?>
             <input type="text" name="password" class="form-control input-sm chat-input" placeholder="Password" />
             </br>
             <div class="wrapper">

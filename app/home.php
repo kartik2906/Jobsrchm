@@ -9,12 +9,16 @@
   <!-- Bootstrap CSS -->
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css">
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="main.js"></script>
+  <script src="http://localhost/Jobsrchm/app/main.js"></script>
 
 
-  <title>Hello, world!</title>
+
+
+
+
+  <title>Job Search!</title>
 </head>
 
 <body>
@@ -25,10 +29,10 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand  href=""><img src=" ./svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand  href=""><img src=" http://localhost/Jobsrchm/app/svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto pl-2">
         <li class="nav-item ">
-          <a class="active" href="index.html">Home</a>
+          <a class="active" href="/Jobsrchm/app/Home/index">Home</a>
         </li>
         <li class="nav-item ">
           <a href="about.html">About Us </a>
@@ -37,16 +41,52 @@
           <a href="">Contact Us </a>
         </li>
         <li class="nav-item ">
-          <a href="register.php">Register</a>
+          <?php if (!$this->session->get_session('loggedin')) { ?>
+            <a href="/Jobsrchm/app/Register/registerForm">Register</a>
+          <?php
+          }
+          ?>
+
         </li>
         <li class="nav-item">
-          <a id="border" href="login.html">Login </a>
+          <?php if (!$this->session->get_session('loggedin')) { ?>
+            <a id="border" href="/Jobsrchm/app/Login/loginForm">Login </a>
+          <?php
+          }
+          ?>
+
         </li>
+        <?php if ($this->session->get_session('loggedin')) { ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?php if ($this->session->get_session('loggedin')) { ?>
+                <p id="username" style="color:white;"> <?php echo  $this->session->get_session('username') ?> </p>
+              <?php
+              }
+              ?>
+            </a>
+            <div class="dropdown-menu drop" id="drop">
+              <?php if ($this->session->get_session('loggedin')) { ?>
+                <a class="dropdown-item" href="/Jobsrchm/app/Dashboard/userDashboard">Dashboard </a>
+              <?php
+              }
+              ?>
+              <?php if ($this->session->get_session('loggedin')) { ?>
+                <a class="dropdown-item" href="/Jobsrchm/app/Login/Logout">Logout </a>
+              <?php
+              }
+              ?>
+            </div>
+          </li>
+        <?php
+        }
+        ?>
       </ul>
       </div>
+
   </nav>
 
-  <header class="masthead text-center">
+  <header class=" masthead text-center">
     <div id="showcase">
       <div id="layer">
         <div class="container">
@@ -66,16 +106,21 @@
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="input-group">
-                            <input type="text" class="form-control" name="Search" placeholder="Search for...">
+                            <input type="text" class="form-control" name="search" placeholder="Search for...">
                           </div>
                           <div class="srch-btn">
-                            <button type="submit" name="submit" class="btn btn-primary">
-                              SEARCH
-                            </button>
+                            <button class="btn btn-lg btn-primary btn-block">SEARCH</button>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </form>
+                  <form action="" method="post">
+                    <select name="location" id="location">
+                      <option selected disabled> Location </option>
+                      <option value="London">London</option>
+                      <option value="Mancheter">Manchester</option>
+                    </select>
                   </form>
                 </div>
               </div>
@@ -85,30 +130,85 @@
         </div>
       </div>
     </div>
+
+
   </header>
+
 
 
   <?php
 
-  require_once __DIR__ . '/start.php';
 
-  use model\recruiter\Recruiter;
-
-  $user = new Recruiter();
-
-
-  if (isset($_GET['Search'])) {
-    echo $user->search($_GET['Search']);
-
-
-
-
-
-    $user->output_error();
-
-
-
+  if (isset($data['result'])) {
+    foreach ($data['result'] as $key => $value) {
   ?>
+
+
+      <div class="card" id="result">
+        <div class="card-header">
+          <?php echo $value->jobtype; ?>
+
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"><?php echo $value->jobdescription; ?></p>
+          <p class="card-text"> <?php echo $value->location; ?></p>
+          <a href="/Jobsrchm/app/Home/viewMore?id=<?php echo $value->recruiterid ?>" class="btn btn-primary">view more</a>
+
+          <?php
+          $userid = $this->session->get_session('userid');
+          !isset($_SESSION['jobs'][$userid]) ? $_SESSION['jobs'][$userid] = [] : $_SESSION['jobs'][$userid];
+          if (!array_key_exists($value->recruiterid, $_SESSION['jobs'][$this->session->get_session('userid')])) {
+          ?>
+            <form action="/Jobsrchm/app/Home/saveJob" method="post" id="saveform">
+              <button class="btn" id="savebtn" name="save" type="submit" href=""><i class="fas fa-heart" style="color:lightgrey"></i></button>
+              <input type="hidden" name="jobid" value="<?php echo $value->recruiterid  ?>"></input>
+            </form>
+          <?php
+          } else {
+          ?>
+
+            <form action="/Jobsrchm/app/Home/removeJob" method="post" id="saveform">
+              <button class="btn" id="savebtn" name="rsave" type="submit" href=""><i class="fas fa-heart" style="color:black"></i></button>
+              <input type="hidden" name="rjobid" value="<?php echo $value->recruiterid  ?>"></input>
+            </form>
+          <?php
+          }
+          ?>
+        </div>
+      </div>
+    <?php
+    }
+    ?>
+
+    <?php
+  } elseif (isset($data['results'])) {
+    if (isset($data['error'])) {
+      echo $data['error'];
+      echo "</p>Please try following result: </p>";
+    }
+    foreach ($data['results'] as $key => $values) {
+    ?>
+      <div class="card">
+        <div class=" card-header">
+          <?php echo $values->jobtype; ?>
+
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"><?php echo $values->jobdescription; ?></p>
+          <p class="card-text"> <?php echo $values->location; ?></p>
+          <a href="/Jobsrchm/app/Home/viewMore?id=<?php echo $values->recruiterid ?>" class="btn 
+          btn-primary">view more</a>
+        </div>
+      </div>
+    <?php
+    }
+
+    ?>
+
+
+
   <?php
   } else {
 
@@ -125,7 +225,7 @@
         <div class="row" id="inside-area">
           <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12  " id="col">
             <div class="img">
-              <img src="./monitor.png">
+              <img src="http://localhost/Jobsrchm/app/monitor.png">
             </div>
             <div class="text">
               <a href="#">Technology</a>
@@ -133,7 +233,7 @@
           </div>
           <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 " id="col">
             <div class="img">
-              <img src="./hand-shake.png">
+              <img src="http://localhost/Jobsrchm/app/hand-shake.png">
             </div>
             <div class="text">
               <a href="#">Business</a>
@@ -141,7 +241,7 @@
           </div>
           <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12" id="col">
             <div class="img">
-              <img src="./purchase.png">
+              <img src="http://localhost/Jobsrchm/app/purchase.png">
             </div>
             <div class="text">
               <a href="#">Retail</a>
@@ -159,7 +259,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="job-img">
-                <img src="./JobSearch.png">
+                <img src="http://localhost/Jobsrchm/app/JobSearch.png">
               </div>
               <p class="">Look for </p>
               <div class="comp-btn">
@@ -181,16 +281,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="./citywide.png">
+            <img src="http://localhost/Jobsrchm/app/citywide.png">
           </div>
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="./capita.png">
+            <img src="http://localhost/Jobsrchm/app/capita.png">
           </div>
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="./oracle.png">
+            <img src="http://localhost/Jobsrchm/app/oracle.png">
           </div>
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="./google.png">
+            <img src="http://localhost/Jobsrchm/app/google.png">
           </div>
         </div>
       </div>
@@ -209,7 +309,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae tenetur provident ab aliquam vitae qui.</p>
           </div>
           <div class="col-lg-6">
-            <img src="./recruit.png">
+            <img src="http://localhost/Jobsrchm/app/recruit.png">
           </div>
         </div>
       </div>
@@ -218,6 +318,7 @@
 
   <?php
   }
+
   ?>
 
 
@@ -229,7 +330,7 @@
             © 2016 Copyright: <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
           </div>
           <div class="col-sm-4 ">
-            <a class="navbar-brand  href=""><img src=" ./svg/logo.svg"> </a> </div> <div class="col-sm-4 " id="foot-links">
+            <a class="navbar-brand  href=""><img src=" http://localhost/Jobsrchm/app/svg/logo.svg"> </a> </div> <div class="col-sm-4 " id="foot-links">
               <a href="#">About Us <span class="sr-only">(current)</span></a>
               <a href="#">Contact Us <span class="sr-only">(current)</span></a>
           </div>
@@ -244,11 +345,12 @@
 
 
 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
 
 
 </body>

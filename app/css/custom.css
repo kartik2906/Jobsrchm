@@ -21,11 +21,9 @@
         font-size: 24px;
         color: #000000;
         letter-spacing: 1.79px; }
-      #area #inside-area #col .img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
+      #area #inside-area #col img {
+        padding: 20px 100px;
+        width: 300px;
         color: rgba(59, 53, 97, 0.9); }
 
 #company-jobs {
@@ -79,8 +77,7 @@
   margin: 20px 0px 0px 0px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid #EEC7C3; }
+  justify-content: center; }
   .post-job p {
     font-family: Avenir-Book;
     font-size: 20px;
@@ -103,19 +100,49 @@
   width: 100%; }
 
 #mainNav {
-  background-color: #453F78;
-  padding-right: 50px; }
+  background-color: #453F78; }
+  @media (max-width: 1000px) {
+    #mainNav .navbarSupportedContent {
+      background-color: #453F78;
+      display: flex;
+      justify-content: center;
+      align-content: center; } }
   #mainNav .navbar-nav li.nav-item a {
     color: white;
     font-family: Helvetica;
     font-size: 14px;
     font-weight: lighter;
-    margin: 0px 30px 0px 0px;
+    margin: 0px 60px 0px 0px;
     text-transform: uppercase;
     text-decoration: none;
-    letter-spacing: 1px; }
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-content: center; }
     #mainNav .navbar-nav li.nav-item a:hover {
       color: aqua; }
+  #mainNav .navbar-nav #dropdown {
+    background-color: #453F78;
+    width: 100%;
+    height: 60%;
+    margin: 0px 60px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-content: center; }
+  #mainNav .navbar-nav #drop {
+    background-color: #453F78;
+    width: 20%; }
+    #mainNav .navbar-nav #drop a {
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-content: center; }
+  @media (max-width: 1000px) {
+    #mainNav .navbar-nav #dropdown {
+      background-color: #453F78;
+      display: flex;
+      justify-content: center;
+      align-content: center; } }
   #mainNav .navbar-nav li.nav-item a.active {
     border-bottom: 2px solid aqua; }
   #mainNav .navbar-nav li.nav-item #border {
@@ -181,9 +208,7 @@ header #srch-layer, masthead #srch-layer {
 i {
   border: solid white;
   border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 15px;
-  margin-top: 480px; }
+  display: inline-block; }
 
 .down {
   transform: rotate(45deg);
@@ -211,35 +236,33 @@ body {
 
 #login-heading {
   font-family: Helvetica;
-  margin-top: 180px; }
+  margin-top: 100px; }
   #login-heading hr, #login-heading #line {
     width: 50%;
     margin: 0 auto; }
 
 #login {
-  margin-top: 100px;
+  margin-top: 60px;
   background: #FFFFFF;
   border: 1px solid #EFC7C2;
   width: 544px;
   height: 480px;
   border-radius: 7px; }
   #login .form-login {
-    margin-top: 160px; }
+    margin-top: 80px; }
     #login .form-login input {
       opacity: 0.9;
       background: #FFFFFF;
       border: 1px solid #EFC7C2;
       padding: 14px;
-      font-size: 20px; }
+      font-size: 20px;
+      margin-top: 20px; }
     #login .form-login placeholder {
       font-family: Helvetica; }
     #login .form-login .wrapper .btn-primary {
-      background: #3B3561;
       border: 1px solid #EEC7C3;
       box-shadow: 0 2px 4px 0 rgba(32, 32, 32, 0.5);
       color: white;
-      width: 284px;
-      height: 77px;
       font-family: Helvetica;
       font-size: 36px;
       letter-spacing: -0.91px; }
@@ -281,13 +304,14 @@ body {
   height: 700px;
   border-radius: 7px; }
   #register .form-register {
-    margin-top: 90px; }
+    margin-top: 20px; }
     #register .form-register input {
       opacity: 0.9;
       background: #FFFFFF;
       border: 1px solid #EFC7C2;
       padding: 10px;
-      font-size: 16px; }
+      font-size: 16px;
+      margin-bottom: 5px; }
       #register .form-register input:hover {
         border-color: rgba(59, 53, 97, 0.9); }
       #register .form-register input:active {
@@ -314,7 +338,7 @@ body {
     font-size: 10px;
     color: #352D56;
     letter-spacing: 0.8px;
-    margin-top: 60px; }
+    margin-top: 30px; }
   #register a {
     opacity: 0.77;
     font-family: HelveticaNeue-Light;
@@ -323,7 +347,7 @@ body {
     letter-spacing: 0.04px; }
 
 .info {
-  margin-top: 100px;
+  margin-top: 190px;
   opacity: 0.77;
   font-family: Avenir-Book;
   font-size: 20px;

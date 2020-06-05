@@ -1,6 +1,6 @@
 <?php
 
-namespace helper;
+namespace app\helper;
 
 class Validation
 {
@@ -13,7 +13,6 @@ class Validation
     public function add_error_field($field_name)
     {
 
-
         if (!$_POST[$field_name]) {
             $this->field_errors[$field_name][$field_name] =  $field_name . 'cannot be empty';
             $this->passed = true;
@@ -23,11 +22,10 @@ class Validation
     public function output_error($field_name)
     {
 
-
+        //  var_dump($this->field_errors[$field_name]);
         if (isset($this->field_errors[$field_name])) {
             foreach ($this->field_errors[$field_name] as $key => $error) {
-
-                echo $error;
+                return $error;
             }
         }
     }
@@ -35,5 +33,46 @@ class Validation
     public function pass()
     {
         return $this->passed;
+    }
+
+
+    public function register_validation($data)
+    {
+
+        foreach ($data as $key => $value) {
+            if ($key == 'firstname') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'lastname') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'email') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'username') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'password') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'roleid') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'token') {
+                $this->add_error_field($key);
+            }
+        }
+    }
+    public function apply_job_validation($data)
+    {
+
+        foreach ($data as $key => $value) {
+            if ($key == 'firstname') {
+                $this->add_error_field($key);
+            }
+            if ($key == 'lastname') {
+                $this->add_error_field($key);
+            }
+        }
     }
 }

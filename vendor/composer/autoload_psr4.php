@@ -6,8 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'model\\' => array($baseDir . '/app/model'),
-    'helper\\' => array($baseDir . '/app/helper'),
-    'controller\\' => array($baseDir . '/app/controller'),
-    'config\\' => array($baseDir . '/app/config'),
+    'app\\' => array($baseDir . '/app'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
 );

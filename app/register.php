@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css" />
   <title>Document</title>
 </head>
 
@@ -22,7 +22,7 @@
     <a class="navbar-brand  href=""><img src=" ./svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto pl-2">
         <li class="nav-item">
-          <a href="index.php">Home </a>
+          <a href="/Jobsrchm/app/Home/index">Home </a>
         </li>
         <li class="nav-item ">
           <a href="about.html">About Us </a>
@@ -31,45 +31,16 @@
           <a href="">Contact Us</a>
         </li>
         <li class="nav-item  ">
-          <a class="active" href="register.php">Register </a>
+          <a class="active" href="/Jobsrchm/app/Register/registerForm">Register </a>
         </li>
         <li class="nav-item  ">
-          <a href="login.html">Login </a>
+          <a href="/Jobsrchm/app/Login/loginForm">Login </a>
         </li>
       </ul>
       </div>
   </nav>
 
-  <?php
 
-
-  require_once __DIR__ . '/start.php';
-
-  use model\user\User;
-  use helper\Validation;
-
-  $validator = new Validation();
-  $users = new User();
-
-  if (isset($_POST['Register'])) {
-
-
-    $validator->add_error_field('firstname');
-    $validator->add_error_field('lastname');
-    $validator->add_error_field('dob');
-    $validator->add_error_field('username');
-    $validator->add_error_field('password');
-    $validator->add_error_field('roleid');
-
-    //var_dump(!$validator->pass());
-    if (!$validator->pass()) {
-      $users->reg_user('firstname', 'lastname', 'dob', 'username', 'password', 'roleid');
-    }
-  }
-
-
-
-  ?>
 
 
   <section id="register-heading">
@@ -91,63 +62,77 @@
       <div class="row">
         <div class=" col-md-8 offset-md-2">
           <div class="form-register text-center">
-            <?php
 
-            //$validator->output_error('firstname');
-            $users->output_error();
-            $validator->output_error('firstname');
-            ?>
-            <input type="text" name="firstname" class="form-control input-sm chat-input" placeholder="Username" />
-            </br>
-            <?php
-            //$validator->output_error('lastname');
-            $validator->output_error('lastname');
-            ?>
-            <input type="text" name="lastname" class="form-control input-sm chat-input" placeholder="Password" />
-            </br>
-            <?php
-            //$validator->add_output_field('dob');
-            $validator->output_error('dob');
-            ?>
-            <input type="text" name="dob" class="form-control input-sm chat-input" placeholder="DOB" />
-            </br>
-            <?php
-            // $validator->add_output_field('username');
-            $validator->output_error('username');
-            ?>
-            <input type="text" name="username" class="form-control input-sm chat-input" placeholder="username" />
-            </br>
-            <?php
-            // $validator->add_output_field('password');
-            $validator->output_error('password');
-            ?>
-            <input type="text" name="password" class="form-control input-sm chat-input" placeholder="password" />
-            </br>
-            <?php
-            // $validator->add_output_field('roleid');
-            $validator->output_error('roleid');
-            ?>
-            <br>
-            <span class="label label-default"> keys: User = 1 &nbsp Recruiter = 2 </span>
-            <input type="text" name="roleid" class="form-control input-sm chat-input" placeholder="Role: Input 1 or 2" />
-            <div class="reg-wrapper">
-              <span class="group-btn ">
-                <button class="btn btn-lg btn-primary btn-block" name="Register">Register</button>
+            <div>
 
-              </span>
+              <?php
+              if ($data['error']->output_error()) {
+              ?>
+                <?php echo $data['error']->output_error(); ?>
+              <?php
+              }
+              ?>
+              <?php
+              if ($data['validator']->output_error('firstname')) {
+              ?>
+                <p class='alert alert-danger'>
+                  <?php echo $data['validator']->output_error('firstname'); ?>
+                </p>
+              <?php
+              }
+              ?>
 
+
+
+
+              <input type=" text" name="firstname" class="form-control input-sm chat-input" placeholder="Username" />
+              </br>
+              <?php
+
+              echo $data['validator']->output_error('lastname');
+              ?>
+              <input type="text" name="lastname" class="form-control input-sm chat-input" placeholder="Password" />
+              </br>
+              <?php
+
+              echo $data['validator']->output_error('email');
+              ?>
+              <input type="text" name="email" class="form-control input-sm chat-input" placeholder="Email" />
+              </br>
+              <?php
+
+              echo $data['validator']->output_error('username');
+              ?>
+              <input type="text" name="username" class="form-control input-sm chat-input" placeholder="username" />
+              </br>
+              <?php
+
+              echo $data['validator']->output_error('password');
+              ?>
+              <input type="text" name="password" class="form-control input-sm chat-input" placeholder="password" />
+              </br>
+              <?php
+              echo $data['validator']->output_error('roleid');
+              ?>
+              <br>
+              <span class="label label-default"> keys: User = 1 &nbsp Recruiter = 2 </span>
+              <input type="text" name="roleid" class="form-control input-sm chat-input" placeholder="Role: Input 1 or 2" />
+              <div class="reg-wrapper">
+                <span class="group-btn ">
+                  <button class="btn btn-lg btn-primary btn-block" name="Register">Register</button>
+
+                </span>
+
+              </div>
+              <input type="hidden" name="token" value="<?php echo $data['tokens']->csrf_token(); ?>" />
 
             </div>
 
           </div>
 
         </div>
-
-      </div>
     </form>
   </div>
-
-
   <section class="info">
     <div class="container text-left">
       <div class="row">

@@ -177,7 +177,27 @@
           ?>
         </div>
       </div>
+      <?php
+    }
+    if (isset($data['apiResult']->results)) {
+      foreach ($data['apiResult']->results as $result) {
+      ?>
+        <div class="card">
+          <div class=" card-header">
+            <?php echo $result->jobTitle; ?>
+
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"><?php echo $result->jobDescription; ?></p>
+            <p class="card-text"> <?php echo $result->locationName;  ?></p>
+            <a href="<?php echo $result->jobUrl ?>" class="btn 
+          btn-primary">view more</a>
+          </div>
+        </div>
+
     <?php
+      }
     }
     ?>
 

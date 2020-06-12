@@ -2,6 +2,15 @@
 
 namespace app\config;
 
+define("EMAIL", "YOUR_EMAIL");
+define("PASSWORD", "YOUR_EMAIL_PASSWORD");
+
+
+//using www.reed.co.uk api to fetch jobs
+define('APIKEY', 'YOUR_API_REED_KEY');
+define('APIPASSWORD', 'YOUR_REED_PASSWORD');
+
+
 class Database
 {
 	private $dbhost = "localhost";
@@ -9,6 +18,7 @@ class Database
 	private $dbpass = "root";
 	private $dbname = "job";
 	public $pdo;
+
 
 
 

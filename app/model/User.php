@@ -164,7 +164,7 @@ class User
 
     try {
 
-      $sql = ("SELECT userid, roleid, username, passwords, firstname, lastname FROM User WHERE  username = :username");
+      $sql = ("SELECT userid, roleid, username, passwords,emailverify, firstname, lastname FROM User WHERE  username = :username");
 
       $query = $this->conn->pdo->prepare($sql);
       $query->execute([
@@ -193,7 +193,7 @@ class User
   public function multiple_user($result)
   {
 
-    if ($result['roleid'] == 1) {
+    if ($result['roleid'] == 1 && $result['emailverify'] == 1) {
 
 
       $this->session->set_session('userid', $result['userid']);
@@ -205,7 +205,7 @@ class User
 
       header("location: /Jobsrchm/app/Home/index");
       return  session_regenerate_id(true);
-    } elseif ($result['roleid'] == 2) {
+    } elseif ($result['roleid'] == 2  && $result['emailverify'] == 1) {
 
       $this->session->set_session('userid', $result['userid']);
       $this->session->set_session('firstname', $result['firstname']);
@@ -216,7 +216,7 @@ class User
       header("location: /Jobsrchm/app/Register/registerForm");
       return session_regenerate_id(true);
     } else {
-      $this->error[] = "username or password is not valid";
+      $this->error[] = "username or password is not valid or verify your email";
     }
   }
 

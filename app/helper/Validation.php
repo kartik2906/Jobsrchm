@@ -18,6 +18,13 @@ class Validation
             $this->passed = true;
         }
     }
+    public function add_email_validation($field_name)
+    {
+        $email = $_POST[$field_name];
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->field_errors[$field_name][$field_name] =  $field_name . ' not valid format';
+        }
+    }
 
     public function output_error($field_name)
     {
@@ -47,6 +54,11 @@ class Validation
                 $this->add_error_field($key);
             }
             if ($key == 'email') {
+
+                if (!$this->add_email_validation($key)) {
+
+                    $this->add_email_validation($key);
+                }
                 $this->add_error_field($key);
             }
             if ($key == 'username') {

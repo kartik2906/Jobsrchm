@@ -2,6 +2,8 @@
 
 namespace app\controller;
 
+
+
 use app\base\Controller as BaseController;
 use app\model\Recruiter;
 use app\helper\Validation;
@@ -9,11 +11,11 @@ use app\model\User;
 use app\helper\Session;
 
 
-
-
 class HomeController extends BaseController
 {
+
   public $session;
+
   public function __construct()
   {
     $this->session = new Session();
@@ -27,20 +29,61 @@ class HomeController extends BaseController
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
       $search = !isset($_REQUEST['search']) ?   $_REQUEST['search'] = '' : $_REQUEST['search'];
+      // $api_search = !isset($_REQUEST['api_search']) ? $_REQUEST['api_search'] = '' : $_REQUEST['search'];
       $search =  $this->sanitize_single_value($search);
       $user = new Recruiter();
       $result = $user->search($search);
-
-
-
       if (!$search) {
         $this->render('home');
       } else {
         if (isset($result)) {
-          $this->render('home', ['result' => $result]);
+          $apiResult = $this->fetchReedApi();
+          $this->render('home', ['result' => $result, 'apiResult' => $apiResult]);
         } else {
           $results =  $user->empty_search();
           $this->render('home', ['error' => $user->output_error(), 'results' => $results]);
+        }
+      }
+    }
+  }
+
+  private function fetchReedApi()
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      $apiseaech = !isset($_REQUEST['search']) ?   $_REQUEST['search'] = '' : $_REQUEST['search'];
+      $username = APIKEY;
+      $password = APIPASSWORD;
+      $token = base64_encode("$username:$password");
+      if (isset($apiseaech)) {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://www.reed.co.uk/api/1.0/search?keywords=" . $apiseaech,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+          // CURLOPT_USERPWD => $username . ":" . $password,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_POSTFIELDS => "",
+          CURLOPT_HTTPHEADER => array(
+            "Authorization: Basic $token",
+            "Content-Type: application/json",
+            "cache-control: no-cache"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          return json_decode($response);
         }
       }
     }
@@ -106,10 +149,6 @@ class HomeController extends BaseController
       }
     }
   }
-
-
-
-
 
   public function viewMore()
   {

@@ -13,9 +13,9 @@ use PHPMailer\PHPMailer\Exception;
 
 use PDOException;
 
+
 class User
 {
-
 
   public $db;
   public $FirstName;
@@ -32,15 +32,13 @@ class User
   {
     $this->session = new Session();
     $this->conn = new Database();
-
-    // $this->session->session_init();
   }
 
-  // public function post()
-  // {
-  // }
 
-
+  /**
+   *  register user query
+   * @param inputfields name are passed are to this function
+   */
   public function reg_user($firstName, $lastName, $email, $userName, $password, $roleId)
   {
 
@@ -66,7 +64,7 @@ class User
       $query =  $this->conn->pdo->prepare($sql);
       $result = $query->execute(array(':firstname' => $this->firstName, ':lastname' => $this->lastName, ':email' => $this->$email, ':username' => $this->userName, ':passwords' => $hash, ':roleid' => $this->roleId, ':token' => $token, ':emailverify' => 0));
 
-
+      // send email
       $this->send_email($email, $token, $firstName);
 
       if ($result) {
@@ -75,6 +73,10 @@ class User
     }
   }
 
+
+  /**
+   * Send email function
+   */
   public function send_email($email, $token, $firstName)
   {
 
@@ -104,7 +106,9 @@ class User
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
   }
-
+  /**
+   * Checks email and token from database
+   */
   public function check_email_token($token, $email)
   {
 
@@ -119,7 +123,9 @@ class User
       $this->error[] = "something went wrong";
     }
   }
-
+  /**
+   * if users email and token is verified, update the emailverify status
+   */
   public function verified($email)
   {
     $num = 1;
@@ -155,7 +161,9 @@ class User
 
 
 
-
+  /**
+   * Login user functionality
+   */
   public function login_user($userName, $password)
   {
 
@@ -186,33 +194,30 @@ class User
     }
   }
 
+  public function set_session($result)
+  {
+    $this->session->set_session('userid', $result['userid']);
+    $this->session->set_session('firstname', $result['firstname']);
+    $this->session->set_session('lastname', $result['lastname']);
+    $this->session->set_session('username', $result['username']);
+    $this->session->set_session('roleid', $result['roleid']);
+    $this->session->set_session('loggedin',  true);
+  }
 
-
-
-
+  /**
+   * Multiple User function
+   */
   public function multiple_user($result)
   {
 
     if ($result['roleid'] == 1 && $result['emailverify'] == 1) {
 
-
-      $this->session->set_session('userid', $result['userid']);
-      $this->session->set_session('firstname', $result['firstname']);
-      $this->session->set_session('lastname', $result['lastname']);
-      $this->session->set_session('username', $result['username']);
-      $this->session->set_session('roleid', $result['roleid']);
-      $this->session->set_session('loggedin',  true);
-
+      $this->set_session($result);
       header("location: /Jobsrchm/app/Home/index");
       return  session_regenerate_id(true);
     } elseif ($result['roleid'] == 2  && $result['emailverify'] == 1) {
 
-      $this->session->set_session('userid', $result['userid']);
-      $this->session->set_session('firstname', $result['firstname']);
-      $this->session->set_session('lastname', $result['lastname']);
-      $this->session->set_session('username', $result['username']);
-      $this->session->set_session('roleid', $result['roleid']);
-      $this->session->set_session('loggedin',  true);
+      $this->set_session($result);
       header("location: /Jobsrchm/app/Register/registerForm");
       return session_regenerate_id(true);
     } else {
@@ -220,6 +225,11 @@ class User
     }
   }
 
+  /**
+   * Apply job functionality
+   * User can send CV with the type of docx or pdf
+   * Only if user user logged will set the foriegn id to the logged in id else will set it 0
+   */
   public function apply_job($firstName, $lastName, $fileName, $submit, $id)
   {
     trim($firstName);
@@ -276,7 +286,9 @@ class User
       }
     }
   }
-
+  /**
+   * encrypt password functionality
+   */
   private function encrypt($pwd)
   {
     return  password_hash($pwd, PASSWORD_BCRYPT, ['cost' => 10]);

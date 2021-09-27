@@ -5,9 +5,9 @@
   <!-- Bootstrap CSS -->
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css">
+  <link rel="stylesheet" href="../../public/css/custom.css">
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="http://localhost/Jobsrchm/app/main.js"></script>
+  <script src="../../main.js"></script>
 
   <script src="main.js"></script>
 
@@ -32,7 +32,7 @@
           <a href="">Contact Us </a>
         </li>
         <li class="nav-item ">
-          <?php if (!$this->session->get_session('loggedin')) { ?>
+          <?php if (!$this->session->getSession('loggedin')) { ?>
             <a href="/Jobsrchm/app/Register/registerForm">Register</a>
           <?php
           }
@@ -40,23 +40,23 @@
         </li>
 
         <li class="nav-item">
-          <?php if (!$this->session->get_session('loggedin')) { ?>
+          <?php if (!$this->session->getSession('loggedin')) { ?>
             <a id="border" href="/Jobsrchm/app/Login/loginForm">Login </a>
           <?php
           }
           ?>
         </li>
-        <?php if ($this->session->get_session('loggedin')) { ?>
+        <?php if ($this->session->getSession('loggedin')) { ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <?php if ($this->session->get_session('loggedin')) { ?>
+              <?php if ($this->session->getSession('loggedin')) { ?>
                 <p id="username" style="color:white;"> <?php echo  $this->session->get_session('username') ?> </p>
               <?php
               }
               ?>
             </a>
             <div class="dropdown-menu drop" id="drop">
-              <?php if ($this->session->get_session('loggedin')) { ?>
+              <?php if ($this->session->getSession('loggedin')) { ?>
                 <a class="dropdown-item" href="/Jobsrchm/app/Login/Logout">Logout </a>
               <?php
               }
@@ -82,7 +82,7 @@
 
       <?php
       if ($data['applyerror']->output_error()) {
-      ?>
+          ?>
         <?php echo $data['applyerror']->output_error(); ?>
       <?php
       }

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css" />
+  <link rel="stylesheet" href="../../public/css/custom.css" />
 
   <title>Login</title>
 </head>
@@ -25,7 +25,7 @@
     <a class="navbar-brand  href=""><img src=" ./svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto pl-2">
         <li class="nav-item ">
-          <a href="/Jobsrchm/app/Home/index">Home</a>
+          <a href="/app/public/Home/index">Home</a>
         </li>
         <li class="nav-item ">
           <a href="about.html">About Us </a>
@@ -34,10 +34,10 @@
           <a href="">Contact Us </a>
         </li>
         <li class="nav-item ">
-          <a href="/Jobsrchm/app/Register/registerForm">Register</a>
+          <a href="/app/public/Register/registerForm">Register</a>
         </li>
         <li class="nav-item  ">
-          <a class="active" href="/Jobsrchm/app/Login/loginForm">Login </a>
+          <a class="active" href="/app/public/Login/loginForm">Login </a>
         </li>
       </ul>
       </div>
@@ -63,7 +63,7 @@
 
   <?php
 
-  // $users->output_error(); 
+  // $users->output_error();
   ?>
   <div class="container" id="login">
 

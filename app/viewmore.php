@@ -5,9 +5,9 @@
   <!-- Bootstrap CSS -->
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css">
+  <link rel="stylesheet" href="../../public/css/custom.css">
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="http://localhost/Jobsrchm/app/main.js"></script>
+  <script src="../../main.js"></script>
 
   <script src="main.js"></script>
   <meta charset="UTF-8">
@@ -73,8 +73,8 @@
   <?php
 
   if (isset($data['viewResult'])) {
-    foreach ($data['viewResult'] as $key => $value) {
-  ?>
+      foreach ($data['viewResult'] as $key => $value) {
+          ?>
       <div class="card " style="width:50%; height:75%; margin-left:25%;">
         <div class="card-header text-center">
           <b> <em><span> Job: <span></em></b>
@@ -91,13 +91,13 @@
         </div>
         <div class="text-center">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            <a href="/Jobsrchm/app/Home/applyJob?id=<?php echo $value->recruiterid ?>" class="btn btn-primary">apply</a>
+            <a href="/app/public/Home/applyJob?id=<?php echo $value->recruiterid ?>" class="btn btn-primary">apply</a>
           </button>
         </div>
       </div>
 
   <?php
-    }
+      }
   }
   ?>
 

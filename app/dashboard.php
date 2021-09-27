@@ -11,10 +11,10 @@
   <title>SB Admin 2 - Dashboard</title>
 
   <!-- Custom fonts for this template-->
-  <link href="http://localhost/Jobsrchm/app/adminassets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link href="../../adminassets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
   <!-- Custom styles for this template-->
-  <link href="http://localhost/Jobsrchm/app/adminassets/css/sb-admin-2.min.css" rel="stylesheet" />
+  <link href="../../adminassets/css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -148,8 +148,8 @@
                 <span class="badge badge-danger badge-counter">
 
                   <?php
-                  if (!empty($_SESSION['jobs'][$this->session->get_session('userid')])) {
-                    echo  count($_SESSION['jobs'][$this->session->get_session('userid')]);
+                  if (!empty($_SESSION['jobs'][$this->session->getSession('userid')])) {
+                      echo  count($_SESSION['jobs'][$this->session->getSession('userid')]);
                   }
 
 
@@ -177,15 +177,15 @@
                     <div class="small text-gray-500"></div>
                     <span class="font-weight-bold">
                       <?php
-                      if (isset($_SESSION['jobs']) && !empty($_SESSION['jobs'][$this->session->get_session('userid')])) {
-                        foreach ($_SESSION['jobs'][$this->session->get_session('userid')] as $key => $value) {
-                          foreach ($value as $key => $values) {
-                      ?>
+                      if (isset($_SESSION['jobs']) && !empty($_SESSION['jobs'][$this->session->getSession('userid')])) {
+                          foreach ($_SESSION['jobs'][$this->session->getSession('userid')] as $key => $value) {
+                              foreach ($value as $key => $values) {
+                                  ?>
                             <div class="small text-gray-500">Jobtype</div>
                             <span class="font-weight-bold"><?php echo $values->jobtype; ?></span>
                       <?php
+                              }
                           }
-                        }
                       }
 
                       ?>
@@ -209,8 +209,8 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                  <?php if ($this->session->get_session('loggedin')) { ?>
-                    <p id="username" style="color:grey;"> <?php echo  $this->session->get_session('username') ?> </p>
+                  <?php if ($this->session->getSession('loggedin')) { ?>
+                    <p id="username" style="color:grey;"> <?php echo  $this->session->getSession('username') ?> </p>
                   <?php
                   }
                   ?>
@@ -226,8 +226,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  <?php if ($this->session->get_session('loggedin')) { ?>
-                    <a class="dropdown-item" href="/Jobsrchm/app/Login/Logout">Logout </a>
+                  <?php if ($this->session->getSession('loggedin')) { ?>
+                    <a class="dropdown-item" href="/app/public/Login/Logout">Logout </a>
                   <?php
                   }
                   ?>
@@ -239,7 +239,7 @@
         <!-- End of Topbar -->
         <?php
         if ($this->session->get_session('loggedin') and $this->session->get_session('roleid') == 1) {
-        ?>
+            ?>
           <h1>
             <p class="card-text">Applied jobs :</p>
           </h1>
@@ -248,8 +248,8 @@
 
 
           if (isset($data['result'])) {
-            foreach ($data['result'] as $key => $value) {
-          ?>
+              foreach ($data['result'] as $key => $value) {
+                  ?>
 
 
               <div class="card" id="result">
@@ -269,12 +269,11 @@
                 </div>
               </div>
           <?php
-            }
-          }
-          ?>
+              }
+          } ?>
         <?php
         } else {
-        ?>
+            ?>
           <h1>
             <p class="card-text">Jobs you posted :</p>
           </h1>
@@ -283,8 +282,8 @@
 
 
           if (isset($data['result'])) {
-            foreach ($data['result'] as $key => $value) {
-          ?>
+              foreach ($data['result'] as $key => $value) {
+                  ?>
 
 
               <div class="card" id="result">
@@ -304,9 +303,8 @@
                 </div>
               </div>
           <?php
-            }
-          }
-          ?>
+              }
+          } ?>
 
         <?php
         }
@@ -319,14 +317,14 @@
 
 
         <!-- Bootstrap core JavaScript-->
-        <script src="http://localhost/Jobsrchm/app/adminassets/vendor/jquery/jquery.min.js"></script>
-        <script src="http://localhost/Jobsrchm/app/adminassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../adminassets/vendor/jquery/jquery.min.js"></script>
+        <script src="../../adminassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="http://localhost/Jobsrchm/app/adminassets/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../../adminassets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="http://localhost/Jobsrchm/app/adminassets/js/sb-admin-2.min.js"></script>
+        <script src="../../adminassets/js/sb-admin-2.min.js"></script>
 </body>
 
 </html>

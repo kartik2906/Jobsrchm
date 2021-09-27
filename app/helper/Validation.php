@@ -12,7 +12,6 @@ class Validation
 
     public function add_error_field($field_name)
     {
-
         if (!$_POST[$field_name]) {
             $this->field_errors[$field_name][$field_name] =  $field_name . 'cannot be empty';
             $this->passed = true;
@@ -45,7 +44,6 @@ class Validation
 
     public function register_validation($data)
     {
-
         foreach ($data as $key => $value) {
             if ($key == 'firstname') {
                 $this->add_error_field($key);
@@ -54,9 +52,7 @@ class Validation
                 $this->add_error_field($key);
             }
             if ($key == 'email') {
-
                 if (!$this->add_email_validation($key)) {
-
                     $this->add_email_validation($key);
                 }
                 $this->add_error_field($key);
@@ -77,7 +73,6 @@ class Validation
     }
     public function apply_job_validation($data)
     {
-
         foreach ($data as $key => $value) {
             if ($key == 'firstname') {
                 $this->add_error_field($key);

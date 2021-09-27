@@ -52,17 +52,4 @@ $(document).ready(function () {
     });
   });
 
-
-
-
-  // $(document).ready(function () {
-  //   $("#savebtn").click(function () {
-  //     $("#saveform").submit(function () {
-
-  //     }); // Submit the form
-  //   });
-
-  // });
-
-
 });

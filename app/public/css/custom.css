@@ -27,7 +27,7 @@
         color: rgba(59, 53, 97, 0.9); }
 
 #company-jobs {
-  background-image: url(../pexels-photo.jpeg);
+  background-image: url(../images/pexels-photo.jpeg);
   background-position: center center;
   background-size: cover;
   min-height: 500px; }
@@ -156,7 +156,7 @@
       border-style: none; } }
 
 header #showcase, masthead #showcase {
-  background-image: url(../header.jpg);
+  background-image: url(../images/header.jpg);
   background-position: top;
   background-size: cover;
   background-attachment: fixed;

@@ -1,1 +1,6 @@
-vendor/phpmailer
+vendor
+.vscode/
+app/.DS_Store
+app/adminassets/.DS_Store
+app/adminassets/js/.DS_Store
+app/controller/.DS_Store

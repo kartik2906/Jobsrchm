@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css" />
+  <link rel="stylesheet" href="../../public/css/custom.css" />
+  <script src="../../main.js"></script>
   <title>Document</title>
 </head>
 
@@ -22,7 +22,7 @@
     <a class="navbar-brand  href=""><img src=" ./svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto pl-2">
         <li class="nav-item">
-          <a href="/Jobsrchm/app/Home/index">Home </a>
+          <a href="/app/public/Home/index">Home </a>
         </li>
         <li class="nav-item ">
           <a href="about.html">About Us </a>
@@ -31,10 +31,10 @@
           <a href="">Contact Us</a>
         </li>
         <li class="nav-item  ">
-          <a class="active" href="/Jobsrchm/app/Register/registerForm">Register </a>
+          <a class="active" href="/app/public/Register/registerForm">Register </a>
         </li>
         <li class="nav-item  ">
-          <a href="/Jobsrchm/app/Login/loginForm">Login </a>
+          <a href="/app/public/Login/loginForm">Login </a>
         </li>
       </ul>
       </div>
@@ -54,9 +54,6 @@
       </div>
     </div>
   </section>
-
-
-
   <div class="container" id="register">
     <form method="post" action="">
       <div class="row">
@@ -67,14 +64,14 @@
 
               <?php
               if ($data['error']->output_error()) {
-              ?>
+                  ?>
                 <?php echo $data['error']->output_error(); ?>
               <?php
               }
               ?>
               <?php
               if ($data['validator']->output_error('firstname')) {
-              ?>
+                  ?>
                 <p class='alert alert-danger'>
                   <?php echo $data['validator']->output_error('firstname'); ?>
                 </p>
@@ -115,16 +112,19 @@
               echo $data['validator']->output_error('roleid');
               ?>
               <br>
-              <span class="label label-default"> keys: User = 1 &nbsp Recruiter = 2 </span>
-              <input type="text" name="roleid" class="form-control input-sm chat-input" placeholder="Role: Input 1 or 2" />
+              <label for="role">Choose a Role:</label>
+              <select name="roleid" id = "role">
+              <option value=""></option>
+                <option value="1">User</option>
+                <option value="2">Recruiter</option>
+              </select>
+
               <div class="reg-wrapper">
                 <span class="group-btn ">
                   <button class="btn btn-lg btn-primary btn-block" name="Register">Register</button>
-
                 </span>
-
               </div>
-              <input type="hidden" name="token" value="<?php echo $data['tokens']->csrf_token(); ?>" />
+              <input type="hidden" name="token" value="<?php echo $data['tokens']->csrfToken(); ?>" />
 
             </div>
 
@@ -145,12 +145,12 @@
     </div>
   </section>
 
-
-
-
+  
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </body>
 

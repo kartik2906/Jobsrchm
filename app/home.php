@@ -9,9 +9,9 @@
   <!-- Bootstrap CSS -->
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/Jobsrchm/app/css/custom.css">
+  <link rel="stylesheet" href="../../public/css/custom.css">
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="http://localhost/Jobsrchm/app/main.js"></script>
+  <script src="../../main.js"></script>
 
 
 
@@ -32,7 +32,7 @@
     <a class="navbar-brand  href=""><img src=" http://localhost/Jobsrchm/app/svg/logo.svg"> </a> <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto pl-2">
         <li class="nav-item ">
-          <a class="active" href="/Jobsrchm/app/Home/index">Home</a>
+          <a class="active" href="/app/public/Home/index">Home</a>
         </li>
         <li class="nav-item ">
           <a href="about.html">About Us </a>
@@ -41,38 +41,38 @@
           <a href="">Contact Us </a>
         </li>
         <li class="nav-item ">
-          <?php if (!$this->session->get_session('loggedin')) { ?>
-            <a href="/Jobsrchm/app/Register/registerForm">Register</a>
+          <?php if (!$this->session->getSession('loggedin')) { ?>
+            <a href="/app/public/Register/registerForm">Register</a>
           <?php
           }
           ?>
 
         </li>
         <li class="nav-item">
-          <?php if (!$this->session->get_session('loggedin')) { ?>
-            <a id="border" href="/Jobsrchm/app/Login/loginForm">Login </a>
+          <?php if (!$this->session->getSession('loggedin')) { ?>
+            <a id="border" href="/app/public/Login/loginForm">Login </a>
           <?php
           }
           ?>
 
         </li>
-        <?php if ($this->session->get_session('loggedin')) { ?>
+        <?php if ($this->session->getSession('loggedin')) { ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <?php if ($this->session->get_session('loggedin')) { ?>
-                <p id="username" style="color:white;"> <?php echo  $this->session->get_session('username') ?> </p>
+              <?php if ($this->session->getSession('loggedin')) { ?>
+                <p id="username" style="color:white;"> <?php echo  $this->session->getSession('username') ?> </p>
               <?php
               }
               ?>
             </a>
             <div class="dropdown-menu drop" id="drop">
-              <?php if ($this->session->get_session('loggedin')) { ?>
-                <a class="dropdown-item" href="/Jobsrchm/app/Dashboard/userDashboard">Dashboard </a>
+              <?php if ($this->session->getSession('loggedin')) { ?>
+                <a class="dropdown-item" href="/app/public/Dashboard/userDashboard">Dashboard </a>
               <?php
               }
               ?>
-              <?php if ($this->session->get_session('loggedin')) { ?>
-                <a class="dropdown-item" href="/Jobsrchm/app/Login/Logout">Logout </a>
+              <?php if ($this->session->getSession('loggedin')) { ?>
+                <a class="dropdown-item" href="/app/public/Login/Logout">Logout </a>
               <?php
               }
               ?>
@@ -140,8 +140,8 @@
 
 
   if (isset($data['result'])) {
-    foreach ($data['result'] as $key => $value) {
-  ?>
+      foreach ($data['result'] as $key => $value) {
+          ?>
 
 
       <div class="card" id="result">
@@ -153,35 +153,34 @@
           <h5 class="card-title"></h5>
           <p class="card-text"><?php echo $value->jobdescription; ?></p>
           <p class="card-text"> <?php echo $value->location; ?></p>
-          <a href="/Jobsrchm/app/Home/viewMore?id=<?php echo $value->recruiterid ?>" class="btn btn-primary">view more</a>
+          <a href="/app/public/Home/viewMore?id=<?php echo $value->recruiterid ?>" class="btn btn-primary">view more</a>
 
           <?php
-          $userid = $this->session->get_session('userid');
+          $userid = $this->session->getSession('userid');
           !isset($_SESSION['jobs'][$userid]) ? $_SESSION['jobs'][$userid] = [] : $_SESSION['jobs'][$userid];
-          if (!array_key_exists($value->recruiterid, $_SESSION['jobs'][$this->session->get_session('userid')])) {
-          ?>
-            <form action="/Jobsrchm/app/Home/saveJob" method="post" id="saveform">
-              <button class="btn" id="savebtn" name="save" type="submit" href=""><i class="fas fa-heart" style="color:lightgrey"></i></button>
+          if (!array_key_exists($value->recruiterid, $_SESSION['jobs'][$this->session->getSession('userid')])) {
+              ?>
+            <form action="/app/public/Home/saveJob" method="post" id="saveform">
+              <button class="btn" id="savebtn" name="save" type="submit" href=""><i style="color:lightgrey" class="far fa-heart" ></i></button>
               <input type="hidden" name="jobid" value="<?php echo $value->recruiterid  ?>"></input>
             </form>
           <?php
           } else {
-          ?>
+              ?>
 
-            <form action="/Jobsrchm/app/Home/removeJob" method="post" id="saveform">
-              <button class="btn" id="savebtn" name="rsave" type="submit" href=""><i class="fas fa-heart" style="color:black"></i></button>
+            <form action="/app/public/Home/removeJob" method="post" id="saveform">
+              <button class="btn" id="savebtn" name="rsave" type="submit"><i class="fas fa-heart" style="color:black"></i></button>
               <input type="hidden" name="rjobid" value="<?php echo $value->recruiterid  ?>"></input>
             </form>
           <?php
-          }
-          ?>
+          } ?>
         </div>
       </div>
       <?php
-    }
-    if (isset($data['apiResult']->results)) {
-      foreach ($data['apiResult']->results as $result) {
-      ?>
+      }
+      if (isset($data['apiResult']->results)) {
+          foreach ($data['apiResult']->results as $result) {
+              ?>
         <div class="card">
           <div class=" card-header">
             <?php echo $result->jobTitle; ?>
@@ -190,25 +189,24 @@
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text"><?php echo $result->jobDescription; ?></p>
-            <p class="card-text"> <?php echo $result->locationName;  ?></p>
+            <p class="card-text"> <?php echo $result->locationName; ?></p>
             <a href="<?php echo $result->jobUrl ?>" class="btn 
           btn-primary">view more</a>
           </div>
         </div>
 
     <?php
-      }
-    }
-    ?>
+          }
+      } ?>
 
     <?php
   } elseif (isset($data['results'])) {
-    if (isset($data['error'])) {
-      echo $data['error'];
-      echo "</p>Please try following result: </p>";
-    }
-    foreach ($data['results'] as $key => $values) {
-    ?>
+      if (isset($data['error'])) {
+          echo $data['error'];
+          echo "</p>Please try following result: </p>";
+      }
+      foreach ($data['results'] as $key => $values) {
+          ?>
       <div class="card">
         <div class=" card-header">
           <?php echo $values->jobtype; ?>
@@ -218,21 +216,18 @@
           <h5 class="card-title"></h5>
           <p class="card-text"><?php echo $values->jobdescription; ?></p>
           <p class="card-text"> <?php echo $values->location; ?></p>
-          <a href="/Jobsrchm/app/Home/viewMore?id=<?php echo $values->recruiterid ?>" class="btn 
+          <a href="/app/public/Home/viewMore?id=<?php echo $values->recruiterid ?>" class="btn 
           btn-primary">view more</a>
         </div>
       </div>
     <?php
-    }
-
-    ?>
+      } ?>
 
 
 
   <?php
   } else {
-
-  ?>
+      ?>
 
 
     <section id="area">
@@ -245,7 +240,7 @@
         <div class="row" id="inside-area">
           <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12  " id="col">
             <div class="img">
-              <img src="http://localhost/Jobsrchm/app/monitor.png">
+              <img src="../../public/images/monitor.png">
             </div>
             <div class="text">
               <a href="#">Technology</a>
@@ -253,7 +248,7 @@
           </div>
           <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 " id="col">
             <div class="img">
-              <img src="http://localhost/Jobsrchm/app/hand-shake.png">
+              <img src="../../public/images/hand-shake.png">
             </div>
             <div class="text">
               <a href="#">Business</a>
@@ -261,7 +256,7 @@
           </div>
           <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12" id="col">
             <div class="img">
-              <img src="http://localhost/Jobsrchm/app/purchase.png">
+              <img src="../../public/images/purchase.png">
             </div>
             <div class="text">
               <a href="#">Retail</a>
@@ -279,7 +274,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="job-img">
-                <img src="http://localhost/Jobsrchm/app/JobSearch.png">
+                <img src="../../public/images/JobSearch.png">
               </div>
               <p class="">Look for </p>
               <div class="comp-btn">
@@ -301,16 +296,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="http://localhost/Jobsrchm/app/citywide.png">
+            <img src="../../public/images/citywide.png">
           </div>
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="http://localhost/Jobsrchm/app/capita.png">
+            <img src="../../public/images/capita.png">
           </div>
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="http://localhost/Jobsrchm/app/oracle.png">
+            <img src="../../public/images/oracle.png">
           </div>
           <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
-            <img src="http://localhost/Jobsrchm/app/google.png">
+            <img src="../../public/images/google.png">
           </div>
         </div>
       </div>
@@ -329,7 +324,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae tenetur provident ab aliquam vitae qui.</p>
           </div>
           <div class="col-lg-6">
-            <img src="http://localhost/Jobsrchm/app/recruit.png">
+            <img src="../../public/images/recruit.png">
           </div>
         </div>
       </div>
